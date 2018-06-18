@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<title>List of Flights</title>
+	
+	<!--  Bootstrap -->	
+	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <h:outputStylesheet name="/resources/static/css/bootstrap.min.css" />
+    <!-- <h:outputStylesheet library="webjars" name="bootstrap/3.3.6/css/bootstrap-theme.min-jsf.css" />
+    <h:outputStylesheet library="webjars" name="font-awesome/4.5.0/css/font-awesome.min-jsf.css" />
+    <h:outputStylesheet name="css/style.css" /> -->
+    <!--  Bootstrap -->
+
+</h:head>
+<h:body>
+	<h2>List of Flights</h2>
+	<h:form>
+		<h:dataTable id="flightTable" value="#{flightBean.getAllFlights()}"	var="flight" border="1" class="table table-striped table-dark">
+			<h:column>
+				<f:facet name="header">Flight Number</f:facet>
+				<h:outputText value="#{flight.flightnr}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Airline</f:facet>
+				<h:outputText value="#{flight.airline.name}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Departure Date</f:facet>
+				<h:outputText value="#{flight.departureDate}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Departure Time</f:facet>
+				<h:outputText value="#{flight.departureTime}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Arrival Date</f:facet>
+				<h:outputText value="#{flight.arrivalDate}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Arrival Time</f:facet>
+				<h:outputText value="#{flight.arrivalTime}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Origin Airport Name</f:facet>
+				<h:outputText value="#{flight.origin.name}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Origin Airport Code</f:facet>
+				<h:outputText value="#{flight.origin.airportcode}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Desination Airport Name</f:facet>
+				<h:outputText value="#{flight.destination.name}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Destination Airport Code</f:facet>
+				<h:outputText value="#{flight.destination.airportcode}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Airplane Model</f:facet>
+				<h:outputText value="#{flight.airplane.model}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Airplane Capacity</f:facet>
+				<h:outputText value="#{flight.airplane.capacity}" />
+			</h:column>
+		</h:dataTable>
+
+		<h:commandButton  actionListener="#{flightBean.getAllFlights()}"   value="Home" action="index" />
+
+	</h:form>
+	
+	<!-- load js at bottom for faster loading-->
+    <h:outputScript name="/resources/static/js/jquery-3.3.1.min.js" />
+    <h:outputScript name="/resources/static/js/popper.min.js" />
+    <h:outputScript name="/resources/static/js/bootstrap.min.js" />
+	
+</h:body>
+</html>

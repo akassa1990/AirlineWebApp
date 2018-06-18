@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>List of Flights</title>
+</h:head>
+<h:body>
+	<h2>List of Flights</h2>
+	<h:form>
+		<p:dataTable id="flightTable" value="#{flightBean.getAllFlights()}" 
+					 var="flight" border="1">
+			<p:column headerText="Flight Number" filterBy="#{flight.flightnr}"	filterMatchMode="contains">
+				<h:outputText value="#{flight.flightnr}" />
+			</p:column>
+			<p:column headerText="Airline" filterBy="#{flight.airline.name}"	filterMatchMode="contains">
+				<h:outputText value="#{flight.airline.name}" />
+			</p:column>
+			<p:column headerText="Departure Date" filterBy="#{flight.departureDate}"	filterMatchMode="exact">
+				<h:outputText value="#{flight.departureDate}" />
+			</p:column>
+			<p:column headerText="Departure Time" filterBy="#{flight.departureTime}"	filterMatchMode="exact">
+				<h:outputText value="#{flight.departureTime}" />
+			</p:column>
+			<p:column headerText="Arrival Date" filterBy="#{flight.arrivalDate}"	filterMatchMode="exact">
+				<h:outputText value="#{flight.arrivalDate}" />
+			</p:column>
+			<p:column headerText="Arrival Time" filterBy="#{flight.arrivalTime}"	filterMatchMode="exact">
+				<h:outputText value="#{flight.arrivalTime}" />
+			</p:column>
+			<p:column headerText="Origin Airport Name" filterBy="#{flight.origin.name}"	filterMatchMode="contains">
+				<h:outputText value="#{flight.origin.name}" />
+			</p:column>
+			<p:column headerText="Origin Airport Code" filterBy="#{flight.origin.airportcode}"	filterMatchMode="contains">
+				<h:outputText value="#{flight.origin.airportcode}" />
+			</p:column>
+			<p:column headerText="Desination Airport Name" filterBy="#{flight.destination.name}"	filterMatchMode="contains">
+				<h:outputText value="#{flight.destination.name}" />
+			</p:column>
+			<p:column headerText="Desination Airport Code" filterBy="#{flight.destination.airportcode}"	filterMatchMode="contains">
+				<h:outputText value="#{flight.destination.airportcode}" />
+			</p:column>
+			<p:column headerText="Airplane Model" filterBy="#{flight.airplane.model}"	filterMatchMode="contains">
+				<h:outputText value="#{flight.airplane.model}" />
+			</p:column>
+				<p:column headerText="Airplane Capacity" filterBy="#{flight.airplane.capacity}"	filterMatchMode="contains">
+				<h:outputText value="#{flight.airplane.capacity}" />
+			</p:column>
+		</p:dataTable>
+
+		<h:commandButton actionListener="#{flightBean.getAllFlights()}"
+			value="Home" action="index" />
+
+	</h:form>
+</h:body>
+</html>
