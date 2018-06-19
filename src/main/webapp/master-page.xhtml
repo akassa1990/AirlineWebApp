@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+					  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:head>
+	<title><ui:insert name="title"></ui:insert></title>
+	<f:facet name="first">
+		<meta http-equiv="X-UA-Compatible" content="IE=11" />
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="Cache-Control"
+			content="no-cache, no-store, must-    revalidate" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta http-equiv="Expires" content="0" />
+	</f:facet>
+</h:head>
+<h:body>
+	<!-- Start Of Header -->
+	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<ui:include src="header.xhtml" /> </nav>
+	<!-- End Of Header -->
+
+	<div class="body slide">
+		<!-- Start Of Menu-->
+		<!-- End Of Menu-->
+
+		<!-- Start Of Content-->
+		<ui:insert name="content">
+			<h1>AirLine Management System</h1>
+		</ui:insert>
+		<!-- End Of Content-->
+	</div>
+	<ui:insert name="script"></ui:insert>
+</h:body>
+</html>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<ui:define name="title">AirLines</ui:define>
+</h:head>
+<h:body>
+	<ui:composition template="/master-page.xhtml">
+		<ui:define name="content">
+			<br />
+			<br />
+			<h:form id="addAirLineForm">
+				<h:panelGrid columns="2">
+					<p:inputText value="#{airLineBean.airlineName}" />
+					<p:commandButton value="Add New AirLine"
+						actionListener="#{airLineBean.addNewAirLine}"
+						update=":airLinesListForm :addAirLineForm" />
+				</h:panelGrid>
+			</h:form>
+			<br />
+			<br />
+			<h:form id="airLinesListForm">
+				<p:messages id="messages" showDetail="true" autoUpdate="true"
+					closable="true" />
+
+				<p:dataTable id="airLineTable" value="#{airLineBean.airlines}"
+					var="airLine" border="1" style="width:50%;" editable="true">
+					<p:ajax event="rowEdit" listener="#{airLineBean.updateAirLine}"
+						update="airLineTable :airLinesListForm:messages" />
+					<p:ajax event="rowEditCancel" />
+					
+					<p:column headerText="AirLine Name" filterBy="#{airLine.name}"
+						filterMatchMode="contains">
+						<h:outputText value="#{airLine.name}" />
+					</p:column>
+					<p:column headerText="Remove">
+						<p:commandButton value="Remove" icon="fa fa-fw fa-remove"
+							type="button" actionListener="#{airLineBean.getSelectAirLine}"
+							oncomplete="removeDlg.show()" update=":removeAirlineForm">
+							<f:attribute name="airline" value="#{airLine}" />
+						</p:commandButton>
+					</p:column>
+					<p:column >
+						<p:rowEditor />
+					</p:column>
+				</p:dataTable>
+			</h:form>
+
+			<p:dialog header="Remove Airline Confirmation" widgetVar="removeDlg"
+				modal="true" height="50" width="100">
+				<h:form id="removeAirlineForm">
+					Are you sure that you want to remove #{airLineBean.selectedAirline.name} airline ?
+					<h:panelGrid columns="2">
+						<p:commandButton value="Remove"
+							actionListener="#{airLineBean.removeAirline}" />
+						<p:commandButton value="Close" onclick="PF('removeDlg').hide();" />
+					</h:panelGrid>
+				</h:form>
+			</p:dialog>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

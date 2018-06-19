@@ -2,19 +2,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<title>Habesha Bank</title>
+
 </h:head>
-<h:body bgcolor="white">
-	<h2>Welcome to Habesha Bank</h2>
-	<!-- <h:link value="Create Account" outcome="createAccount"></h:link>
-	<br />
-	<h:link value="Deposit Account" outcome="deposit"></h:link>
-	<br />
-	<h:link value="List All Accounts" outcome="listAccount"></h:link>
-	<br />
-	<h:link value="Withdraw" outcome="withdraw"></h:link> -->
+<h:body>
+	<ui:composition template="/master-page.xhtml">
+		<ui:define name="content">
+
+		</ui:define>
+	</ui:composition>
 </h:body>
 </html>
