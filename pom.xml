@@ -91,6 +91,11 @@
 			<artifactId>derbyclient</artifactId>
 			<version>10.13.1.1</version>
 		</dependency>
-
+	<!-- Jersey Core -->
+		<dependency>
+			<groupId>org.glassfish.jersey.core</groupId>
+			<artifactId>jersey-server</artifactId>
+			<version>2.22.2</version>
+		</dependency>
 	</dependencies>
 </project>
