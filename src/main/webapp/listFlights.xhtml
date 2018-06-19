@@ -9,6 +9,11 @@
 
 <h:head>
 	<ui:define name="title">Flights</ui:define>
+
+	<!--  Bootstrap -->
+	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<h:outputStylesheet library="css" name="bootstrap.min.css" />
 </h:head>
 <h:body>
 	<ui:composition template="/master-page.xhtml">
@@ -72,5 +77,9 @@
 			</h:form>
 		</ui:define>
 	</ui:composition>
+	<!-- load js at bottom for faster loading-->
+	<h:outputScript library="js" name="jquery-3.3.1.min.js" />
+	<h:outputScript library="js" name="popper.min.js" />
+	<h:outputScript library="js" name="bootstrap.min.js" />
 </h:body>
 </html>
