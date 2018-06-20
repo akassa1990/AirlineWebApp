@@ -20,7 +20,7 @@ public class Airline {
 	@GeneratedValue
 	private long id;
 	private String name;
-	@OneToMany(mappedBy = "airline", orphanRemoval = true, cascade = CascadeType.DETACH)
+	@OneToMany(mappedBy = "airline", orphanRemoval = true, cascade = CascadeType.ALL)
 	@OrderBy("departureDate, departureTime")
 	private List<Flight> flights = new ArrayList<>();
 

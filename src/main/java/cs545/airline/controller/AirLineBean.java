@@ -6,6 +6,7 @@ import java.util.List;
 import javax.ejb.Init;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
@@ -16,6 +17,7 @@ import cs545.airline.model.Airline;
 import cs545.airline.service.AirlineService;
 
 @ManagedBean(name = "airLineBean")
+@ViewScoped
 public class AirLineBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -55,7 +57,6 @@ public class AirLineBean implements Serializable {
 		try {
 			addFlag = true;
 			updateFlag = false;
-			System.out.println("update Air Line ID : " + selectedAirline.getId());
 			airlineService.update(selectedAirline);
 			strMsg = "The airline " + selectedAirline.getName() + " updated successfuly";
 			FacesContext.getCurrentInstance().addMessage(null,
@@ -79,7 +80,6 @@ public class AirLineBean implements Serializable {
 		try {
 			addFlag = true;
 			updateFlag = false;
-			System.out.println("Remove  Air Line");
 			airlineService.delete(selectedAirline);
 			strMsg = "The airline " + selectedAirline.getName() + " deleted successfuly";
 			FacesContext.getCurrentInstance().addMessage(null,
@@ -97,7 +97,6 @@ public class AirLineBean implements Serializable {
 		updateFlag = true;
 		addFlag = false;
 		selectedAirline = (Airline) event.getComponent().getAttributes().get("airline");
-		System.out.println("selected :: " + selectedAirline.getName() + " :: " + selectedAirline.getId());
 	}
 
 	public List<Airline> getAirlines() {

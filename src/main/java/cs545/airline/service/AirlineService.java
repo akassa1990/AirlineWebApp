@@ -16,9 +16,6 @@ import cs545.airline.model.Flight;
 @Transactional
 public class AirlineService {
 
-	// These services should be evaluated to reconsider which methods should be
-	// public
-
 	@Inject
 	private AirlineDao airlineDao;
 	
@@ -31,7 +28,6 @@ public class AirlineService {
 	}
 
 	public Airline update(Airline airline) {
-		System.out.println("updaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaate");
 		return airlineDao.update(airline);
 	}
 
