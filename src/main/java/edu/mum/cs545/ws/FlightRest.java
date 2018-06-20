@@ -1,19 +1,21 @@
 package edu.mum.cs545.ws;
-
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
-
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
 
 import cs545.airline.model.Airline;
 import cs545.airline.model.Airplane;
@@ -26,6 +28,8 @@ import cs545.airline.service.FlightService;
 
 @Named
 @Path("flight")
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 public class FlightRest {
 
 	@Inject
@@ -115,7 +119,30 @@ public class FlightRest {
 		return (airport != null) ? flightService.findByDestination(airport) : new ArrayList<Flight>();
 	}
 	
-	@Path("depature/between")
+	@Path("new")
+	@POST
+	public void create(Flight flight) {
+		flightService.create(flight);
+	}
+	
+	@Path("edit")
+	@PUT
+	public Flight update(Flight flight) {
+		Flight flight2 = flightService.find(flight);
+		if(flight2 != null) flightService.update(flight);
+		return flight2;
+	}
+	
+	@Path("delete")
+	@DELETE
+	public void delete(Flight flight) {
+		Flight flight2 = flightService.find(flight);
+		if(flight2 != null) flightService.delete(flight2);
+	}
+	
+	
+	
+	/*@Path("depature/between")
 	@GET
 	public List<Flight> findByDepartureBetween(@DefaultValue("00/00/00") @QueryParam("from") String from, @DefaultValue("00/00/00") @QueryParam("to") String to) {
 		
@@ -137,6 +164,6 @@ public class FlightRest {
 		}
 		
 		return flights;
-	}
+	}*/
 	
 }
