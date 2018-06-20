@@ -37,7 +37,7 @@ public class FlightRest {
 	@Inject
 	private AirplaneService airplaneService;
 	@Inject
-	private AirportService airporteService;
+	private AirportService airportService;
 	@Inject
 	private AirlineService airlineService;
 
@@ -87,35 +87,35 @@ public class FlightRest {
 	
 	@Path("airplane")
 	@GET
-	public List<Flight> findByAirplane(@QueryParam("code") String code) {
-		Airplane airplane = airplaneService.findBySrlnr(code);
+	public List<Flight> findByAirplane(@DefaultValue("#") @QueryParam("code") String code) {
+		Airplane airplane = (!code.isEmpty()) ? airplaneService.findBySrlnr(code) : null;
 		return (airplane != null) ? flightService.findByAirplane(airplane) : new ArrayList<Flight>();
 	}
 	
 	@Path("number")
 	@GET
-	public List<Flight> findByNumber(@QueryParam("no") String no) {
-		return flightService.findByNumber(no);
+	public List<Flight> findByNumber(@DefaultValue("#") @QueryParam("no") String no) {
+		return (!no.isEmpty()) ? flightService.findByNumber(no) : new ArrayList<Flight>();
 	}
 
 	@Path("airline")
 	@GET
-	public List<Flight> findByAirline(@QueryParam("name") String name) {
-		Airline airline = airlineService.findByName(name);
+	public List<Flight> findByAirline(@DefaultValue("#") @QueryParam("name") String name) {
+		Airline airline = (!name.isEmpty()) ? airlineService.findByName(name) : null;
 		return (airline != null) ? flightService.findByAirline(airline) : new ArrayList<Flight>();
 	}
 	
 	@Path("origin")
 	@GET
-	public List<Flight> findByOrigin(@QueryParam("code") String code) {
-		Airport airport = airporteService.findByCode(code);
+	public List<Flight> findByOrigin(@DefaultValue("#") @QueryParam("code") String code) {
+		Airport airport = (!code.isEmpty()) ? airportService.findByCode(code) : null;
 		return (airport != null) ? flightService.findByOrigin(airport) : new ArrayList<Flight>();
 	}
 	
 	@Path("destination")
 	@GET
-	public List<Flight> findByDestination(@QueryParam("code") String code) {
-		Airport airport = airporteService.findByCode(code);
+	public List<Flight> findByDestination(@DefaultValue("#") @QueryParam("code") String code) {
+		Airport airport = airportService.findByCode(code);
 		return (airport != null) ? flightService.findByDestination(airport) : new ArrayList<Flight>();
 	}
 	
@@ -128,7 +128,7 @@ public class FlightRest {
 	@Path("edit")
 	@PUT
 	public Flight update(Flight flight) {
-		Flight flight2 = flightService.find(flight);
+		Flight flight2 = (flight != null) ? flightService.find(flight) : flight;
 		if(flight2 != null) flightService.update(flight);
 		return flight2;
 	}
@@ -136,7 +136,7 @@ public class FlightRest {
 	@Path("delete")
 	@DELETE
 	public void delete(Flight flight) {
-		Flight flight2 = flightService.find(flight);
+		Flight flight2 = (flight != null) ? flightService.find(flight) : flight;
 		if(flight2 != null) flightService.delete(flight2);
 	}
 	

@@ -53,20 +53,20 @@ public class AirplaneRest {
 	@Path("flight")
 	@GET
 	public List<Airplane> findByFlight(Flight flight) {
-		Flight flight2 = flightService.find(flight);
+		Flight flight2 = (flight != null) ? flightService.find(flight) : flight;
 		return (flight2 != null) ? airplaneService.findByFlight(flight2) : new ArrayList<Airplane>();
 	}
 	
 	@Path("new")
 	@POST
 	public void create(Airplane airplane) {
-		airplaneService.create(airplane);
+		if(airplane != null) airplaneService.create(airplane);
 	}
 	
 	@Path("edit")
 	@PUT
 	public Airplane update(Airplane airplane) {
-		Airplane airplane2 = airplaneService.find(airplane);
+		Airplane airplane2 = (airplane != null) ? airplaneService.find(airplane) : airplane;
 		if(airplane2 != null) airplaneService.update(airplane);
 		return airplane2;
 	}
@@ -74,7 +74,7 @@ public class AirplaneRest {
 	@Path("delete")
 	@DELETE
 	public void delete(Airplane airplane) {
-		Airplane airplane2 = airplaneService.find(airplane);
+		Airplane airplane2 = (airplane != null) ? airplaneService.find(airplane) : airplane;
 		if(airplane2 != null) airplaneService.delete(airplane2);
 	}
 	
