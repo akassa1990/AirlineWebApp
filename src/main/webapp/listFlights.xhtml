@@ -8,8 +8,6 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<ui:define name="title">Flights</ui:define>
-
 	<!--  Bootstrap -->
 	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -17,12 +15,13 @@
 </h:head>
 <h:body>
 	<ui:composition template="/master-page.xhtml">
+		<ui:define name="title">Flights</ui:define>	
 		<ui:define name="content">
 			<br />
 			<br />
 			<h:form>
 				<p:dataTable id="flightTable" value="#{flightBean.getAllFlights()}"
-					var="flight" border="1" style="width:50%;">
+					var="flight" border="1">
 					<p:column headerText="Flight Number" filterBy="#{flight.flightnr}"
 						filterMatchMode="contains">
 						<h:outputText value="#{flight.flightnr}" />

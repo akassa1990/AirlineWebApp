@@ -12,14 +12,16 @@
 </h:head>
 <h:body>
 	<ui:composition template="/master-page.xhtml">
+		<ui:define name="title">Home Page</ui:define>
+
 		<ui:define name="content">
-			
-			<h3>Welcome to our Home Page</h3>
-	
-		<h:graphicImage value="http://static2.uk.businessinsider.com/image/56d960552e5265ba008bb4e9-1200/singapore-changi-airport.jpg" />
-			
-			
-			
+
+			<center>
+				<h1>Welcome to The Airline System</h1>
+				<h:graphicImage width="100%"
+					value="http://static2.uk.businessinsider.com/image/56d960552e5265ba008bb4e9-1200/singapore-changi-airport.jpg" />
+			</center>
+
 		</ui:define>
 	</ui:composition>
 </h:body>
