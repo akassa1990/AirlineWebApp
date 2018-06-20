@@ -26,6 +26,7 @@ public class AirlineDao {
 	}
 
 	public Airline update(Airline airline) {
+		System.out.println("meeeeeeeeeeeeeeeeeeeeeeeeeerge");
 		return entityManager.merge(airline);
 	}
 

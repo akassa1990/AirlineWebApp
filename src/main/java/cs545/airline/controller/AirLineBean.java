@@ -21,12 +21,14 @@ public class AirLineBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private List<Airline> airlines;
+	private List<Airline> filterAirlines;
 	private String airlineName;
 	private Airline selectedAirline;
+	private boolean updateFlag;
+	private boolean addFlag = true;
 
 	@Inject
 	private AirlineService airlineService;
-
 
 	public void addNewAirLine() {
 		String strMsg = "";
@@ -35,7 +37,7 @@ public class AirLineBean implements Serializable {
 			Airline airline = new Airline();
 			airline.setName(airlineName);
 			airlineService.create(airline);
-			strMsg = "The airline " + airlineName + "Added successfuly";
+			strMsg = "The airline " + airlineName + " added successfuly";
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, strMsg, " "));
 			airlineName = "";
@@ -43,32 +45,59 @@ public class AirLineBean implements Serializable {
 			e.printStackTrace();
 			strMsg = "There is an error please try again later!";
 			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_INFO, strMsg, " "));
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, strMsg, " "));
 		}
 
 	}
 
-	public void updateAirLine(RowEditEvent event) { 
+	public void edit() {
+		String strMsg = "";
 		try {
-			System.out.println("update Air Line");
-			Airline airline = (Airline) event.getObject();
-			airlineService.update(airline);
+			addFlag = true;
+			updateFlag = false;
+			System.out.println("update Air Line ID : " + selectedAirline.getId());
+			airlineService.update(selectedAirline);
+			strMsg = "The airline " + selectedAirline.getName() + " updated successfuly";
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, strMsg, " "));
+			airlineName = "";
 		} catch (Exception e) {
 			e.printStackTrace();
+			strMsg = "There is an error please try again later!";
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, strMsg, " "));
 		}
+	}
+
+	public void cancelUpdate() {
+		addFlag = true;
+		updateFlag = false;
 	}
 
 	public void removeAirline() {
+		String strMsg = "";
 		try {
+			addFlag = true;
+			updateFlag = false;
 			System.out.println("Remove  Air Line");
 			airlineService.delete(selectedAirline);
+			strMsg = "The airline " + selectedAirline.getName() + " deleted successfuly";
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, strMsg, " "));
+			airlineName = "";
 		} catch (Exception e) {
 			e.printStackTrace();
+			strMsg = "There is an error please try again later!";
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, strMsg, " "));
 		}
 	}
 
-	public void getSelectAirLine(ActionEvent event) { 
+	public void getSelectedAirline(ActionEvent event) {
+		updateFlag = true;
+		addFlag = false;
 		selectedAirline = (Airline) event.getComponent().getAttributes().get("airline");
+		System.out.println("selected :: " + selectedAirline.getName() + " :: " + selectedAirline.getId());
 	}
 
 	public List<Airline> getAirlines() {
@@ -103,6 +132,30 @@ public class AirLineBean implements Serializable {
 
 	public void setSelectedAirline(Airline selectedAirline) {
 		this.selectedAirline = selectedAirline;
+	}
+
+	public List<Airline> getFilterAirlines() {
+		return filterAirlines;
+	}
+
+	public void setFilterAirlines(List<Airline> filterAirlines) {
+		this.filterAirlines = filterAirlines;
+	}
+
+	public boolean isUpdateFlag() {
+		return updateFlag;
+	}
+
+	public void setUpdateFlag(boolean updateFlag) {
+		this.updateFlag = updateFlag;
+	}
+
+	public boolean isAddFlag() {
+		return addFlag;
+	}
+
+	public void setAddFlag(boolean addFlag) {
+		this.addFlag = addFlag;
 	}
 
 }

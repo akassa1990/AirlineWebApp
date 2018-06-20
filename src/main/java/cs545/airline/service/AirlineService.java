@@ -31,6 +31,7 @@ public class AirlineService {
 	}
 
 	public Airline update(Airline airline) {
+		System.out.println("updaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaate");
 		return airlineDao.update(airline);
 	}
 

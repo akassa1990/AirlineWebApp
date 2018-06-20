@@ -5,7 +5,8 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <h:head>
 	<ui:define name="title">AirLines</ui:define>
@@ -16,49 +17,72 @@
 			<br />
 			<br />
 			<h:form id="addAirLineForm">
-				<h:panelGrid columns="2">
-					<p:inputText value="#{airLineBean.airlineName}" />
-					<p:commandButton value="Add New AirLine"
-						actionListener="#{airLineBean.addNewAirLine}"
-						update=":airLinesListForm :addAirLineForm" />
-				</h:panelGrid>
-			</h:form>
-			<br />
-			<br />
-			<h:form id="airLinesListForm">
+				<p:panel id="addEditPanel">
+					<c:if test="#{airLineBean.addFlag == 'true'}">
+						<h:panelGrid id="addPanel" columns="2">
+							<p:inputText value="#{airLineBean.airlineName}" />
+							<p:commandButton value="Add New AirLine"
+								actionListener="#{airLineBean.addNewAirLine}"
+								update=":addAirLineForm:airLineTable" />
+						</h:panelGrid>
+					</c:if>
+					<c:if test="#{airLineBean.updateFlag == 'true'}">
+						<h:panelGrid id="updatePanel" columns="3">
+							<p:inputText value="#{airLineBean.selectedAirline.name}" />
+							<p:commandButton id="edit" value="Edit" ajax="true"
+								actionListener="#{airLineBean.edit}"
+								update=":addAirLineForm:airLineTable :addAirLineForm:addEditPanel" />
+							<p:commandButton value="Cancel"
+								actionListener="#{airLineBean.cancelUpdate}"
+								update=":addAirLineForm:addEditPanel" />
+						</h:panelGrid>
+					</c:if>
+				</p:panel>
+				<br />
+				<br />
 				<p:messages id="messages" showDetail="true" autoUpdate="true"
 					closable="true" />
 
 				<p:dataTable id="airLineTable" value="#{airLineBean.airlines}"
-					var="airLine" border="1" style="width:50%;" editable="true">
-					<p:ajax event="rowEdit" listener="#{airLineBean.updateAirLine}"
-						update="airLineTable :airLinesListForm:messages" />
-					<p:ajax event="rowEditCancel" />
-					
+					var="airLine" border="1" style="width:50%;" editable="true"
+					filteredValue="#{airLineBean.filterAirlines}">
 					<p:column headerText="AirLine Name" filterBy="#{airLine.name}"
 						filterMatchMode="contains">
 						<h:outputText value="#{airLine.name}" />
 					</p:column>
-					<p:column headerText="Remove">
-						<p:commandButton value="Remove" icon="fa fa-fw fa-remove"
-							type="button" actionListener="#{airLineBean.getSelectAirLine}"
-							oncomplete="removeDlg.show()" update=":removeAirlineForm">
+
+					<p:column headerText="Edit">
+						<p:commandButton value="Edit" icon="fa fa-fw fa-edit"
+							actionListener="#{airLineBean.getSelectedAirline}"
+							update=":addAirLineForm:addEditPanel">
 							<f:attribute name="airline" value="#{airLine}" />
 						</p:commandButton>
 					</p:column>
-					<p:column >
-						<p:rowEditor />
+
+					<p:column headerText="Remove">
+						<p:commandButton value="Remove"
+							actionListener="#{airLineBean.getSelectedAirline}"
+							icon="fa fa-fw fa-remove" oncomplete="PF('removeDlg').show();"
+							update=":removeAirlineForm">
+							<f:attribute name="airline" value="#{airLine}" />
+						</p:commandButton>
 					</p:column>
+
 				</p:dataTable>
 			</h:form>
 
+
 			<p:dialog header="Remove Airline Confirmation" widgetVar="removeDlg"
-				modal="true" height="50" width="100">
+				height="100" width="500">
 				<h:form id="removeAirlineForm">
 					Are you sure that you want to remove #{airLineBean.selectedAirline.name} airline ?
+					<br />
+					<br />
 					<h:panelGrid columns="2">
 						<p:commandButton value="Remove"
-							actionListener="#{airLineBean.removeAirline}" />
+							actionListener="#{airLineBean.removeAirline}"
+							update=":addAirLineForm:airLineTable"
+							oncomplete="PF('removeDlg').hide();" />
 						<p:commandButton value="Close" onclick="PF('removeDlg').hide();" />
 					</h:panelGrid>
 				</h:form>
