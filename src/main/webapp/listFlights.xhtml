@@ -8,6 +8,32 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
+
+	
+	<style type="text/css">
+            .ui-datatable .ui-datatable-header {
+                text-align: right !important;
+            }
+            
+            .ui-button-text-only .ui-button-text {
+                padding: 0.3em 0.4em;
+            }
+            
+            .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-header .ui-chkbox {
+                display: none;
+            }
+            
+            .ui-filter-column .ui-column-customfilter .custom-filter {
+                width: 100%;
+                box-sizing: border-box;
+            }
+            
+            .year-spinner input {
+                width: 100%;
+                box-sizing: border-box;
+            }
+        </style>
+
 	<!--  Bootstrap -->
 	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -15,13 +41,22 @@
 </h:head>
 <h:body>
 	<ui:composition template="/master-page.xhtml">
-		<ui:define name="title">Flights</ui:define>	
+		<ui:define name="title">Flights</ui:define>
 		<ui:define name="content">
 			<br />
 			<br />
 			<h:form>
-				<p:dataTable id="flightTable" value="#{flightBean.getAllFlights()}"
-					var="flight" border="1">
+				<p:dataTable id="flightTable" value="#{flightBean.getAllFlights()}" widgetVar="flightTable"
+					var="flight" border="1" style="width:50%;" emptyMessage="No Flight Detail Found With Given Criteria">
+
+					<f:facet name="header" >
+						<p:outputPanel>
+							<h:outputText value="Search all fields:" />
+							<p:inputText id="globalFilter" onkeyup="PF('flightTable').filter()"
+										 style="width:150px" placeholder="Enter keyword" />
+						</p:outputPanel>
+					</f:facet>
+
 					<p:column headerText="Flight Number" filterBy="#{flight.flightnr}"
 						filterMatchMode="contains">
 						<h:outputText value="#{flight.flightnr}" />
@@ -31,19 +66,19 @@
 						<h:outputText value="#{flight.airline.name}" />
 					</p:column>
 					<p:column headerText="Departure Date"
-						filterBy="#{flight.departureDate}" filterMatchMode="exact">
+						filterBy="#{flight.departureDate}" filterMatchMode="contains">
 						<h:outputText value="#{flight.departureDate}" />
 					</p:column>
 					<p:column headerText="Departure Time"
-						filterBy="#{flight.departureTime}" filterMatchMode="exact">
+						filterBy="#{flight.departureTime}" filterMatchMode="contains">
 						<h:outputText value="#{flight.departureTime}" />
 					</p:column>
 					<p:column headerText="Arrival Date"
-						filterBy="#{flight.arrivalDate}" filterMatchMode="exact">
+						filterBy="#{flight.arrivalDate}" filterMatchMode="contains">
 						<h:outputText value="#{flight.arrivalDate}" />
 					</p:column>
 					<p:column headerText="Arrival Time"
-						filterBy="#{flight.arrivalTime}" filterMatchMode="exact">
+						filterBy="#{flight.arrivalTime}" filterMatchMode="contains">
 						<h:outputText value="#{flight.arrivalTime}" />
 					</p:column>
 					<p:column headerText="Origin Airport Name"
