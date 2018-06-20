@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+</h:head>
+<h:body>
+	<ui:composition template="/master-page.xhtml">
+		<ui:define name="title">Documentation</ui:define>
+		<ui:define name="content">
+			<h2>Project document</h2>
+			<ol>
+				<li><a href="http://localhost:8080/airlinesWebApp/index.xhtml">Click
+						here to access at the home page</a></li>
+				<li>
+					<h4>Details on the Web Service</h4>
+					<ul>
+						<li>The service consumes and produces only <em>JSON type</em></li>
+						<li>The principal url to access it's :
+							localhost:8080/airlinesWebApp/ws/ + <strong>path</strong>
+						</li>
+						<li><strong><em>Flight Service</em></strong>
+							<table border="1">
+								<tr>
+									<th>Path</th>
+									<th>Method</th>
+									<th>Argument</th>
+									<th>Query Param Name</th>
+									<th>Query Param Format</th>
+									<th>Description :</th>
+								</tr>
+								<tr>
+									<td>/flight/list</td>
+									<td>GET</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td>To get all flights</td>
+								</tr>
+								<tr>
+									<td>/flight/depatures</td>
+									<td>GET</td>
+									<td></td>
+									<td>date</td>
+									<td>"MM/dd/yyyy hh:mm:ss"</td>
+									<td>List flight by a date of depature</td>
+								</tr>
+								<tr>
+									<td>/flight/arrivals</td>
+									<td>GET</td>
+									<td></td>
+									<td>date</td>
+									<td>"MM/dd/yyyy hh:mm:ss"</td>
+									<td>List flight by a date of arrival</td>
+								</tr>
+								<tr>
+									<td>/flight/airplane</td>
+									<td>GET</td>
+									<td></td>
+									<td>code</td>
+									<td>String Format</td>
+									<td>List flight by an airplane</td>
+								</tr>
+								<tr>
+									<td>/flight/number</td>
+									<td>GET</td>
+									<td></td>
+									<td>no</td>
+									<td>String Format</td>
+									<td>List flight by a number of flight</td>
+								</tr>
+								<tr>
+									<td>/flight/airline</td>
+									<td>GET</td>
+									<td></td>
+									<td>name</td>
+									<td>StringFormat</td>
+									<td>List flight by an airline</td>
+								</tr>
+								<tr>
+									<td>/flight/origin</td>
+									<td>GET</td>
+									<td></td>
+									<td>code</td>
+									<td>String Format</td>
+									<td>List flight by airport code of depature</td>
+								</tr>
+								<tr>
+									<td>/flight/destination</td>
+									<td>GET</td>
+									<td></td>
+									<td>code</td>
+									<td>String Format</td>
+									<td>List flight by airport code of destination</td>
+								</tr>
+								<tr>
+									<td>/flight/new</td>
+									<td>POST</td>
+									<td>Flight Object</td>
+									<td></td>
+									<td></td>
+									<td>Add a new flight</td>
+								</tr>
+								<tr>
+									<td>/flight/edit</td>
+									<td>PUT</td>
+									<td>Flight Object</td>
+									<td></td>
+									<td></td>
+									<td>Edit a flight</td>
+								</tr>
+								<tr>
+									<td>/flight/delete</td>
+									<td>DELETE</td>
+									<td>Flight Object</td>
+									<td></td>
+									<td></td>
+									<td>Delete a flight</td>
+								</tr>
+							</table></li>
+						<li><strong><em>Airplane Service</em></strong>
+							<table border="1">
+								<tr>
+									<th>Path</th>
+									<th>Method</th>
+									<th>Argument</th>
+									<th>Query Param Name</th>
+									<th>Query Param Format</th>
+									<th>Description :</th>
+								</tr>
+								<tr>
+									<td>/airplane/list</td>
+									<td>GET</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td>To get all airplanes</td>
+								</tr>
+								<tr>
+									<td>/airplane/model</td>
+									<td>GET</td>
+									<td></td>
+									<td>model</td>
+									<td>String Format</td>
+									<td>List airplane by model</td>
+								</tr>
+								<tr>
+									<td>/airplane/serial</td>
+									<td>GET</td>
+									<td></td>
+									<td>code</td>
+									<td>String Format</td>
+									<td>List flight by serial number of airplane</td>
+								</tr>
+								<tr>
+									<td>/airplane/flight</td>
+									<td>GET</td>
+									<td>Flight Object</td>
+									<td></td>
+									<td></td>
+									<td>List airplane by an flight</td>
+								</tr>
+								<tr>
+									<td>/airplane/new</td>
+									<td>POST</td>
+									<td>Airplane Object</td>
+									<td></td>
+									<td></td>
+									<td>Add a new airplane</td>
+								</tr>
+								<tr>
+									<td>/airplane/edit</td>
+									<td>PUT</td>
+									<td>Airplane Object</td>
+									<td></td>
+									<td></td>
+									<td>Edit a airplane</td>
+								</tr>
+								<tr>
+									<td>/airplane/delete</td>
+									<td>DELETE</td>
+									<td>Airplane Object</td>
+									<td></td>
+									<td></td>
+									<td>Delete a airplane</td>
+								</tr>
+							</table></li>
+						<li><strong><em>Airline Service</em></strong>
+							<table border="1">
+								<tr>
+									<th>Path</th>
+									<th>Method</th>
+									<th>Argument</th>
+									<th>Query Param Name</th>
+									<th>Query Param Format</th>
+									<th>Description :</th>
+								</tr>
+								<tr>
+									<td>/airplane/list</td>
+									<td>GET</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td>To get all airplanes</td>
+								</tr>
+								<tr>
+									<td>/airplane/model</td>
+									<td>GET</td>
+									<td></td>
+									<td>model</td>
+									<td>String Format</td>
+									<td>List airplane by model</td>
+								</tr>
+								<tr>
+									<td>/airplane/serial</td>
+									<td>GET</td>
+									<td></td>
+									<td>code</td>
+									<td>String Format</td>
+									<td>List flight by serial number of airplane</td>
+								</tr>
+								<tr>
+									<td>/airplane/flight</td>
+									<td>GET</td>
+									<td>Flight Object</td>
+									<td></td>
+									<td></td>
+									<td>List airplane by an flight</td>
+								</tr>
+								<tr>
+									<td>/airplane/new</td>
+									<td>POST</td>
+									<td>Airplane Object</td>
+									<td></td>
+									<td></td>
+									<td>Add a new airplane</td>
+								</tr>
+								<tr>
+									<td>/airplane/edit</td>
+									<td>PUT</td>
+									<td>Airplane Object</td>
+									<td></td>
+									<td></td>
+									<td>Edit a airplane</td>
+								</tr>
+								<tr>
+									<td>/airplane/delete</td>
+									<td>DELETE</td>
+									<td>Airplane Object</td>
+									<td></td>
+									<td></td>
+									<td>Delete a airplane</td>
+								</tr>
+							</table></li>
+						<li><strong><em>Airport Service</em></strong>
+							<table border="1">
+								<tr>
+									<th>Path</th>
+									<th>Method</th>
+									<th>Argument</th>
+									<th>Query Param Name</th>
+									<th>Query Param Format</th>
+									<th>Description :</th>
+								</tr>
+								<tr>
+									<td>/airplane/list</td>
+									<td>GET</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td>To get all airplanes</td>
+								</tr>
+								<tr>
+									<td>/airplane/model</td>
+									<td>GET</td>
+									<td></td>
+									<td>model</td>
+									<td>String Format</td>
+									<td>List airplane by model</td>
+								</tr>
+								<tr>
+									<td>/airplane/serial</td>
+									<td>GET</td>
+									<td></td>
+									<td>code</td>
+									<td>String Format</td>
+									<td>List flight by serial number of airplane</td>
+								</tr>
+								<tr>
+									<td>/airplane/flight</td>
+									<td>GET</td>
+									<td>Flight Object</td>
+									<td></td>
+									<td></td>
+									<td>List airplane by an flight</td>
+								</tr>
+								<tr>
+									<td>/airplane/new</td>
+									<td>POST</td>
+									<td>Airplane Object</td>
+									<td></td>
+									<td></td>
+									<td>Add a new airplane</td>
+								</tr>
+								<tr>
+									<td>/airplane/edit</td>
+									<td>PUT</td>
+									<td>Airplane Object</td>
+									<td></td>
+									<td></td>
+									<td>Edit a airplane</td>
+								</tr>
+								<tr>
+									<td>/airplane/delete</td>
+									<td>DELETE</td>
+									<td>Airplane Object</td>
+									<td></td>
+									<td></td>
+									<td>Delete a airplane</td>
+								</tr>
+							</table></li>
+					</ul>
+				</li>
+			</ol>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>
