@@ -134,7 +134,7 @@ public class FlightRest {
 	}
 	
 	@Path("delete")
-	@DELETE
+	@POST
 	public void delete(Flight flight) {
 		Flight flight2 = (flight != null) ? flightService.find(flight) : flight;
 		if(flight2 != null) flightService.delete(flight2);

@@ -67,12 +67,12 @@ public class AirplaneRest {
 	@PUT
 	public Airplane update(Airplane airplane) {
 		Airplane airplane2 = (airplane != null) ? airplaneService.find(airplane) : airplane;
-		if(airplane2 != null) airplaneService.update(airplane);
+		if(airplane2 != null) airplaneService.update(airplane2);
 		return airplane2;
 	}
 	
 	@Path("delete")
-	@DELETE
+	@POST
 	public void delete(Airplane airplane) {
 		Airplane airplane2 = (airplane != null) ? airplaneService.find(airplane) : airplane;
 		if(airplane2 != null) airplaneService.delete(airplane2);
